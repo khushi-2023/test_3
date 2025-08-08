@@ -4,7 +4,7 @@ from git_executor import execute_git_commands
 from voice_feedback import speak, log_command
 
 print("🚀 Voice-Git Automation Started")
-speak("Please say offline or online to select ASR mode")
+speak("Please say offline or online to select A S R mode")
 
 # ✅ Voice-based mode selection loop
 while True:
@@ -33,14 +33,28 @@ try:
         if not text:
             continue
 
+        text = text.lower()
         print(f"🎤 [{mode.capitalize()} Mode] Recognized: {text}")
 
+        # 🔁 Live Mode Switching
+        if "switch to offline" in text or "change to offline" in text:
+            mode = "offline"
+            speak("Switched to offline mode")
+            print("🔁 Switched to Offline Mode")
+            continue
+        elif "switch to online" in text or "change to online" in text:
+            mode = "online"
+            speak("Switched to online mode")
+            print("🔁 Switched to Online Mode")
+            continue
+
         # ✅ Exit command
-        if text.lower() in ["exit", "quit", "stop", "close"]:
+        if text in ["exit", "quit", "stop", "close"]:
             print("👋 Exiting Voice-Git Automation. Goodbye!")
             speak("Exiting Voice Git Automation. Goodbye!")
             break
 
+        # 🔍 Git Command Parsing
         commands = parse_git_command(text)
 
         if commands[0] == "Unknown command":
