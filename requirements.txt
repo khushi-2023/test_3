@@ -1,0 +1,13 @@
+openai-whisper
+SpeechRecognition
+pyaudio
+spacy
+GitPython
+streamlit
+pyttsx3
+google-cloud-speech
+librosa
+numpy
+scikit-learn
+PyGithub
+vosk
